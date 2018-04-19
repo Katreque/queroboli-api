@@ -112,7 +112,7 @@ module.exports = function(app, db) {
       pessoas: req.body.pessoasDisponiveis
     };
 
-    const query = {_id: new ObjectId("5ad8d2accba15a0014a2289c")};
+    const query = {_id: new ObjectId("5ad8d9b19db4aa00149c2264")};
     const update = {$set:{pessoasDisponiveis: pessoasDisponiveis.pessoas}}
 
     db.collection('listagemPessoasDisponiveisPogChamp').updateOne(query, update, (err, result) => {
