@@ -33,11 +33,11 @@ module.exports = function(app, db) {
       }, 5000)
     }
 
-    var retornaPessoaEscolhida = () {
+    retornaPessoaEscolhida() {
       return this.pessoaEscolhida;
     }
 
-    var retornaListaPessoasDisponiveis = () {
+    retornaListaPessoasDisponiveis() {
       return this.listaPessoasDisponiveisPogChamp;
     }
 
