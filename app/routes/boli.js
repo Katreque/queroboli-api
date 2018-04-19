@@ -43,7 +43,7 @@ module.exports = function(app, db) {
         'Vitin BacknoKibe'
       ]
     };
-    db.collection('boliapi').insert(listagemPessoas, (err, result) => {
+    db.collection('listagemPessoasDisponiveis').insert(listagemPessoas, (err, result) => {
       if (err) {
         res.send({ 'error': err });
       } else {
