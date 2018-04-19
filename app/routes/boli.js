@@ -1,3 +1,5 @@
+var ObjectId = require('mongodb').ObjectID;
+
 module.exports = function(app, db) {
   app.get('/boli-pessoa-escolhida', (req, res) => {
     db.collection('pessoaEscolhida').find().toArray((err, pessoaEscolhida) => {
@@ -28,14 +30,14 @@ module.exports = function(app, db) {
       pessoa: req.body.pessoaEscolhida
     };
 
-    const query = {_id: "5ad8d2accba15a0014a2289c"};
+    const query = {_id: new ObjectId("5ad8d2accba15a0014a2289c")};
     const update = {$set:{pessoaEscolhida: pessoaEscolhida.pessoa}}
 
     db.collection('pessoaEscolhida').updateOne(query, update, (err, result) => {
       if (err) {
         res.send({ 'error': err });
       } else {
-        res.send(result);
+        res.send(result.nModified);
       }
     });
   });
