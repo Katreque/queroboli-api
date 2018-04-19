@@ -1,4 +1,4 @@
-const App = require('../app.js');
+const App = require('./app.js');
 
 module.exports = function(app, db) {
   app.get('/boli-pessoa-escolhida', (req, res) => {
