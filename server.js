@@ -22,6 +22,7 @@ MongoClient.connect(db.url, (err, client) => {
   }
 
   const db = client.db('queroboli')
+  require('./app/routes')(app, db);
   require('./app')(app, db);
 
   app.listen(port, () => {

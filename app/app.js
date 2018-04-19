@@ -1,22 +1,17 @@
-class App {
-  constructor(app, db) {
-    const ObjectId = require('mongodb').ObjectID;
+module.exports = function(app, db) {
+  const ObjectId = require('mongodb').ObjectID;
 
-    this.app = app;
-    this.db = db;
+  this.pessoaEscolhida = "";
+  this.listaPessoasDisponiveisPogChamp = [];
+  this.listaTotalPessoas = [];
 
-    this.pessoaEscolhida = "";
-    this.listaPessoasDisponiveisPogChamp = [];
-    this.listaTotalPessoas = [];
+  this.recuperaListaTotalPessoas();
+  this.recuperaListaPessoasDisponiveis();
+  this.recuperaPessoaEscolhida();
 
-    this.recuperaListaTotalPessoas();
-    this.recuperaListaPessoasDisponiveis();
-    this.recuperaPessoaEscolhida();
+  this.controleTempo();
 
-    this.controleTempo();
-  }
-
-  escolhePessoa() {
+  var escolhePessoa = function() {
     if (this.listaPessoasDisponiveisPogChamp.length !== 0) {
       let index = Math.floor(Math.random() * this.listaPessoasDisponiveisPogChamp.length);
       let escolhida = this.listaPessoasDisponiveisPogChamp.splice(index, 1);
@@ -29,45 +24,45 @@ class App {
     return this.listaPessoasDisponiveisPogChamp = this.listaTotalPessoas;
   }
 
-  controleTempo() {
+  var controleTempo = function() {
     setInterval(() => {
       return this.escolhePessoa();
     }, 5000)
   }
 
-  retornaPessoaEscolhida() {
+  var retornaPessoaEscolhida = function() {
     return this.pessoaEscolhida;
   }
 
-  retornaListaPessoasDisponiveis() {
+  var retornaListaPessoasDisponiveis = function() {
     return this.listaPessoasDisponiveisPogChamp;
   }
 
-  recuperaListaTotalPessoas() {
+  var recuperaListaTotalPessoas = function() {
     db.collection('listagemPessoas').find().toArray((err, listagemPessoas) => {
       if (err) {
         console.log({'error': err });
-        } else {
-          this.listaTotalPessoas = listagemPessoas[0];
-        }
+      } else {
+        this.listaTotalPessoas = listagemPessoas[0];
+      }
     });
   }
 
-  updateBancoListaTotalPessoas() {
+  var updateBancoListaTotalPessoas = function() {
     //Não há necessidade por enquanto.
   }
 
-  recuperaListaPessoasDisponiveis() {
+  var recuperaListaPessoasDisponiveis = function() {
     db.collection('listagemPessoasDisponiveisPogChamp').find().toArray((err, listagemPessoasDisponiveisPogChamp) => {
       if (err) {
-          console.log({'error': err });
-        } else {
-          this.listaPessoasDisponiveisPogChamp = listagemPessoasDisponiveisPogChamp[0];
-        }
+        console.log({'error': err });
+      } else {
+        this.listaPessoasDisponiveisPogChamp = listagemPessoasDisponiveisPogChamp[0];
+      }
     });
   }
 
-  updateBancoListaPessoasDisponiveis(pessoas) {
+  var updateBancoListaPessoasDisponiveis = function(pessoas) {
     const query = {_id: new ObjectId("5ad8d9b19db4aa00149c2264")};
     const update = {$set:{pessoasDisponiveis: pessoas}}
 
@@ -78,17 +73,17 @@ class App {
     });
   }
 
-  recuperaPessoaEscolhida() {
+  var recuperaPessoaEscolhida = function() {
     db.collection('pessoaEscolhida').find().toArray((err, pessoaEscolhida) => {
       if (err) {
-          console.log({'error': err });
-        } else {
-          this.pessoaEscolhida = pessoaEscolhida[0];
-        }
+        console.log({'error': err });
+      } else {
+        this.pessoaEscolhida = pessoaEscolhida[0];
+      }
     });
   }
 
-  updateBancoPessoaEscolhida(pessoa) {
+  var updateBancoPessoaEscolhida = function(pessoa) {
     const query = {_id: new ObjectId("5ad8d2accba15a0014a2289c")};
     const update = {$set:{pessoaEscolhida: pessoa}}
 
