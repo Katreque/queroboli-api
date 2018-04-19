@@ -1,11 +1,9 @@
-const App = require('./app.js');
-
-module.exports = function(app, db) {
+module.exports = function(app, db, main) {
   app.get('/boli-pessoa-escolhida', (req, res) => {
-    res.send({pessoa: App.retornaPessoaEscolhida()});
+    res.send({pessoa: main.retornaPessoaEscolhida()});
   });
 
   app.get('/boli-listagem-pessoas-disponiveis', (req, res) => {
-    res.send({pessoas: App.retornaListaPessoasDisponiveis()});
+    res.send({pessoas: main.retornaListaPessoasDisponiveis()});
   });
 };

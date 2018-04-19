@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const db = require('./config/db');
 const app = express();
+const App = require('./app/app.js');
 
 const port = process.env.PORT || 7770;
 const corsOptions = {
@@ -22,7 +23,8 @@ MongoClient.connect(db.url, (err, client) => {
   }
 
   const db = client.db('queroboli')
-  require('./app/routes')(app, db);
+  const main = new App(db);
+  require('./app/routes')(app, db, main);
 
   app.listen(port, () => {
     console.log('Porta: ' + port);
