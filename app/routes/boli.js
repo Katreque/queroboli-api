@@ -28,7 +28,7 @@ module.exports = function(app, db) {
       pessoa: req.body.pessoaEscolhida
     };
 
-    const query = {_id: "5ad8a4fe196e0900145c1a0c"};
+    const query = {_id: "5ad8d2accba15a0014a2289c"};
     const update = {$set:{pessoaEscolhida: pessoaEscolhida.pessoa}}
 
     db.collection('pessoaEscolhida').updateOne(query, update, (err, result) => {
