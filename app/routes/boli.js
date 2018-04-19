@@ -1,6 +1,6 @@
 module.exports = function(app, db) {
   app.get('/boli-pessoa-escolhida', (req, res) => {
-    db.collection('boliapi').find().toArray((err, pessoaEscolhida) => {
+    db.collection('pessoaEscolhida').find().toArray((err, pessoaEscolhida) => {
       if (err) {
         res.send({'error': err });
         } else {
@@ -13,7 +13,25 @@ module.exports = function(app, db) {
     const pessoaEscolhida = {
       pessoaEscolhida: req.body.pessoaEscolhida
     };
-    db.collection('boliapi').insert(pessoaEscolhida, (err, result) => {
+
+    db.collection('pessoaEscolhida').insert(pessoaEscolhida, (err, result) => {
+      if (err) {
+        res.send({ 'error': err });
+      } else {
+        res.send(result.ops[0]);
+      }
+    });
+  });
+
+  app.post('/boli-pessoa-escolhida-update', (req, res) => {
+    const pessoaEscolhida = {
+      pessoa: req.body.pessoaEscolhida
+    };
+
+    const query = {_id: "5ad8a4fe196e0900145c1a0c"};
+    const update = {$set:{pessoaEscolhida: pessoaEscolhida.pessoa}}
+
+    db.collection('pessoaEscolhida').updateOne(query, update, (err, result) => {
       if (err) {
         res.send({ 'error': err });
       } else {
