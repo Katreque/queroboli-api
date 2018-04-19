@@ -1,4 +1,4 @@
-module.exports = (app, db) {
+module.exports = function(app, db) {
   class App {
     constructor() {
       const ObjectId = require('mongodb').ObjectID;
