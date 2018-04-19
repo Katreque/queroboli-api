@@ -1,0 +1,23 @@
+{
+  "name": "queroboli-api",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Katreque/queroboli-api.git"
+  },
+  "author": "Katreque",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Katreque/queroboli-api/issues"
+  },
+  "homepage": "https://github.com/Katreque/queroboli-api#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "mongodb": "^3.0.7"
+  }
+}
