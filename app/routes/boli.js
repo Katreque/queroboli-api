@@ -6,7 +6,7 @@ module.exports = function(app, db) {
       if (err) {
         res.send({'error': err });
         } else {
-          res.send(pessoaEscolhida);
+          res.send(pessoaEscolhida[0]);
         }
     });
   });
@@ -49,7 +49,7 @@ module.exports = function(app, db) {
       if (err) {
         res.send({'error': err });
         } else {
-          res.send(listagemPessoas);
+          res.send(listagemPessoas[0]);
         }
     });
   });
@@ -77,11 +77,11 @@ module.exports = function(app, db) {
   //Listagem pessoas disponiveis
 
   app.get('/boli-listagem-pessoas-disponiveis', (req, res) => {
-    db.collection('listagemPessoasDisponiveisPogChamp').find().toArray((err, listagemPessoas) => {
+    db.collection('listagemPessoasDisponiveisPogChamp').find().toArray((err, listagemPessoasDisponiveisPogChamp) => {
       if (err) {
-        res.send({'error': err });
+          res.send({'error': err });
         } else {
-          res.send(listagemPessoas);
+          res.send(listagemPessoasDisponiveisPogChamp[0]);
         }
     });
   });
