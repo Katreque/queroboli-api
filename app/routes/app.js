@@ -1,41 +1,41 @@
 module.exports = function(app, db) {
   const ObjectId = require('mongodb').ObjectID;
 
-  this.pessoaEscolhida = "";
-  this.listaPessoasDisponiveisPogChamp = [];
-  this.listaTotalPessoas = [];
+  var pessoaEscolhida = "";
+  var listaPessoasDisponiveisPogChamp = [];
+  var listaTotalPessoas = [];
 
-  this.recuperaListaTotalPessoas();
-  this.recuperaListaPessoasDisponiveis();
-  this.recuperaPessoaEscolhida();
+  recuperaListaTotalPessoas();
+  recuperaListaPessoasDisponiveis();
+  recuperaPessoaEscolhida();
 
-  this.controleTempo();
+  controleTempo();
 
   var escolhePessoa = function() {
-    if (this.listaPessoasDisponiveisPogChamp.length !== 0) {
-      let index = Math.floor(Math.random() * this.listaPessoasDisponiveisPogChamp.length);
-      let escolhida = this.listaPessoasDisponiveisPogChamp.splice(index, 1);
-      this.updateBancoListaPessoasDisponiveis(this.listaPessoasDisponiveisPogChamp);
+    if (listaPessoasDisponiveisPogChamp.length !== 0) {
+      let index = Math.floor(Math.random() * listaPessoasDisponiveisPogChamp.length);
+      let escolhida = listaPessoasDisponiveisPogChamp.splice(index, 1);
+      updateBancoListaPessoasDisponiveis(listaPessoasDisponiveisPogChamp);
 
-      this.pessoaEscolhida = escolhida;
-      this.updateBancoPessoaEscolhida(this.pessoaEscolhida);
+      pessoaEscolhida = escolhida;
+      updateBancoPessoaEscolhida(pessoaEscolhida);
     }
 
-    return this.listaPessoasDisponiveisPogChamp = this.listaTotalPessoas;
+    return listaPessoasDisponiveisPogChamp = listaTotalPessoas;
   }
 
   var controleTempo = function() {
     setInterval(() => {
-      return this.escolhePessoa();
+      return escolhePessoa();
     }, 5000)
   }
 
   var retornaPessoaEscolhida = function() {
-    return this.pessoaEscolhida;
+    return pessoaEscolhida;
   }
 
   var retornaListaPessoasDisponiveis = function() {
-    return this.listaPessoasDisponiveisPogChamp;
+    return listaPessoasDisponiveisPogChamp;
   }
 
   var recuperaListaTotalPessoas = function() {
@@ -43,7 +43,7 @@ module.exports = function(app, db) {
       if (err) {
         console.log({'error': err });
       } else {
-        this.listaTotalPessoas = listagemPessoas[0];
+        listaTotalPessoas = listagemPessoas[0];
       }
     });
   }
@@ -57,7 +57,7 @@ module.exports = function(app, db) {
       if (err) {
         console.log({'error': err });
       } else {
-        this.listaPessoasDisponiveisPogChamp = listagemPessoasDisponiveisPogChamp[0];
+        listaPessoasDisponiveisPogChamp = listagemPessoasDisponiveisPogChamp[0];
       }
     });
   }
@@ -78,7 +78,7 @@ module.exports = function(app, db) {
       if (err) {
         console.log({'error': err });
       } else {
-        this.pessoaEscolhida = pessoaEscolhida[0];
+        pessoaEscolhida = pessoaEscolhida[0];
       }
     });
   }
