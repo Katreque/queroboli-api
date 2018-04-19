@@ -1,17 +1,49 @@
 module.exports = function(app, db) {
-  app.get('/boli', (req, res) => {
-    db.collection('boli').find().toArray((err, notas) => {
+  app.get('/boli-pessoa-escolhida', (req, res) => {
+    db.collection('boliapi').find().toArray((err, pessoaEscolhida) => {
       if (err) {
         res.send({'error': err });
         } else {
-          res.send(notas);
+          res.send(pessoaEscolhida);
         }
     });
   });
 
-  app.post('/boli', (req, res) => {
-    const note = { text: req.body.body, title: req.body.title };
-    db.collection('boli').insert(note, (err, result) => {
+  app.post('/boli-pessoa-escolhida', (req, res) => {
+    const pessoaEscolhida = {
+      pessoaEscolhida: req.body.pessoaEscolhida
+    };
+    db.collection('boliapi').insert(pessoaEscolhida, (err, result) => {
+      if (err) {
+        res.send({ 'error': err });
+      } else {
+        res.send(result.ops[0]);
+      }
+    });
+  });
+
+  app.get('/boli-listagem-pessoas', (req, res) => {
+    db.collection('listagemPessoasDisponiveis').find().toArray((err, listagemPessoas) => {
+      if (err) {
+        res.send({'error': err });
+        } else {
+          res.send(listagemPessoas);
+        }
+    });
+  });
+
+  app.post('/boli-listagem-pessoas', (req, res) => {
+    const listagemPessoas = {
+      pessoasDisponiveis: [
+        'Renan Verissimo',
+        'Phills Bad man',
+        'Eric KappaPride',
+        'Leo Pederasta',
+        'Nogueira 4Head',
+        'Vitin BacknoKibe'
+      ]
+    };
+    db.collection('boliapi').insert(listagemPessoas, (err, result) => {
       if (err) {
         res.send({ 'error': err });
       } else {
