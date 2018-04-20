@@ -1,6 +1,7 @@
 class App {
-  constructor(db) {
+  constructor() {
     const Server = require('../server.js');
+    console.log('Rodou!');
 
     this.db = Server.Client;
     this.pessoaEscolhida = "";

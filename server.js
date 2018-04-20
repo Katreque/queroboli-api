@@ -23,6 +23,8 @@ app.listen(port, () => {
   console.log('Porta: ' + port);
 });
 
+let _app = new App();
+
 module.exports = {
   Client: client,
   App: app
