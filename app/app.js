@@ -1,6 +1,4 @@
 const { Client } = require('pg');
-
-const port = process.env.PORT || 7770;
 const client = new Client({
   connectionString: process.env.DATABASE_URL,
   ssl: true
@@ -19,6 +17,7 @@ var construct = function() {
   //recuperaPessoaEscolhida();
 
   db.connect();
+  console.log('Kappa');
   createBancoListaTotalPessoas();
   db.end();
   //controleTempo();
@@ -66,6 +65,7 @@ var updateBancoListaTotalPessoas = function() {
 }
 
 var createBancoListaTotalPessoas = function() {
+  console.log('Chamou aqui!');
   db.query('CREATE TABLE totalPessoas(id INT PRIMARY KEY NOT NULL, pessoa CHAR(50) NOT NULL)', (err, res) => {
     if (err) throw err;
     console.log(res)
