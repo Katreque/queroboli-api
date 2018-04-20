@@ -1,17 +1,18 @@
+const { Client } = require('pg');
+
+const port = process.env.PORT || 7770;
+const client = new Client({
+  connectionString: process.env.DATABASE_URL,
+  ssl: true
+})
+
+const db = client;
+var pessoaEscolhida = "";
+var listaPessoasDisponiveisPogChamp = [];
+var listaTotalPessoas = [];
+
 var construct = function() {
   console.log('Rodou!');
-  const { Client } = require('pg');
-
-  const port = process.env.PORT || 7770;
-  const client = new Client({
-    connectionString: process.env.DATABASE_URL,
-    ssl: true
-  })
-
-  const db = client;
-  var pessoaEscolhida = "";
-  var listaPessoasDisponiveisPogChamp = [];
-  var listaTotalPessoas = [];
 
   //recuperaListaTotalPessoas();
   //recuperaListaPessoasDisponiveis();
@@ -65,7 +66,6 @@ var updateBancoListaTotalPessoas = function() {
 }
 
 var createBancoListaTotalPessoas = function() {
-  console.log('Bateu aqui');
   db.query('CREATE TABLE totalPessoas(id INT PRIMARY KEY NOT NULL, pessoa CHAR(50) NOT NULL)', (err, res) => {
     if (err) throw err;
     console.log(res)
