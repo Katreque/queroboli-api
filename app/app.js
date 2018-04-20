@@ -66,9 +66,12 @@ var updateBancoListaTotalPessoas = function() {
 
 var createBancoListaTotalPessoas = function() {
   console.log('Chamou aqui!');
-  db.query('CREATE TABLE totalPessoas(id INT PRIMARY KEY NOT NULL, pessoa CHAR(50) NOT NULL)', (err, res) => {
-    if (err) throw err;
-    console.log(res)
+  db.query('CREATE TABLE totalPessoas(id INT PRIMARY KEY, pessoa CHAR(50))', (err, res) => {
+    if (err) {
+      console.log(err)
+    } else {
+      console.log(res)
+    }
   })
 
   db.query('INSERT INTO totalPessoas VALUES (1, Katreque)', (err, res) => {
