@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
-const App = require('./app/app.js').App;
+const App = require('./app/app.js');
 const { Client } = require('pg');
 
 const port = process.env.PORT || 7770;
@@ -21,11 +21,9 @@ app.use(bodyParser.json());
 
 app.listen(port, () => {
   console.log('Porta: ' + port);
+  App.construct();
 });
 
-let _app = new App();
-
 module.exports = {
-  Client: client,
   App: app
 }

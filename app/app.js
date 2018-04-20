@@ -1,130 +1,138 @@
-class App {
-  constructor() {
-    const Server = require('../server.js');
-    console.log('Rodou!');
+var construct = function() {
+  console.log('Rodou!');
+  const { Client } = require('pg');
 
-    this.db = Server.Client;
-    this.pessoaEscolhida = "";
-    this.listaPessoasDisponiveisPogChamp = [];
-    this.listaTotalPessoas = [];
+  const port = process.env.PORT || 7770;
+  const client = new Client({
+    connectionString: process.env.DATABASE_URL,
+    ssl: true
+  })
 
-    //this.recuperaListaTotalPessoas();
-    //this.recuperaListaPessoasDisponiveis();
-    //this.recuperaPessoaEscolhida();
+  db = client;
+  pessoaEscolhida = "";
+  listaPessoasDisponiveisPogChamp = [];
+  listaTotalPessoas = [];
 
-    this.db.connect();
-    this.createBancoListaTotalPessoas();
-    this.db.end();
-    //this.controleTempo();
+  //recuperaListaTotalPessoas();
+  //recuperaListaPessoasDisponiveis();
+  //recuperaPessoaEscolhida();
+
+  db.connect();
+  createBancoListaTotalPessoas();
+  db.end();
+  //controleTempo();
+}
+
+var escolhePessoa = function() {
+  if (listaPessoasDisponiveisPogChamp.length !== 0) {
+    let index = Math.floor(Math.random() * listaPessoasDisponiveisPogChamp.length);
+    let escolhida = listaPessoasDisponiveisPogChamp.splice(index, 1);
+    updateBancoListaPessoasDisponiveis(listaPessoasDisponiveisPogChamp);
+
+    pessoaEscolhida = escolhida;
+    updateBancoPessoaEscolhida(pessoaEscolhida);
   }
 
-  escolhePessoa() {
-    if (this.listaPessoasDisponiveisPogChamp.length !== 0) {
-      let index = Math.floor(Math.random() * this.listaPessoasDisponiveisPogChamp.length);
-      let escolhida = this.listaPessoasDisponiveisPogChamp.splice(index, 1);
-      this.updateBancoListaPessoasDisponiveis(this.listaPessoasDisponiveisPogChamp);
+  return listaPessoasDisponiveisPogChamp = listaTotalPessoas;
+}
 
-      this.pessoaEscolhida = escolhida;
-      this.updateBancoPessoaEscolhida(this.pessoaEscolhida);
+var controleTempo = function() {
+  setInterval(() => {
+    return escolhePessoa();
+  }, 5000)
+}
+
+var retornaPessoaEscolhida = function() {
+  return pessoaEscolhida;
+}
+
+var retornaListaPessoasDisponiveis = function() {
+  return listaPessoasDisponiveisPogChamp;
+}
+
+var recuperaListaTotalPessoas = function() {
+  db.query('SELECT', (err, listagemPessoas) => {
+    if (err) {
+      console.log({'error': err });
+    } else {
+      listaTotalPessoas = listagemPessoas[0];
     }
+  });
+}
 
-    return this.listaPessoasDisponiveisPogChamp = this.listaTotalPessoas;
-  }
+var updateBancoListaTotalPessoas = function() {
+  //Não há necessidade por enquanto.
+}
 
-  controleTempo() {
-    setInterval(() => {
-      return this.escolhePessoa();
-    }, 5000)
-  }
+var createBancoListaTotalPessoas = function() {
+  db.query('CREATE TABLE totalPessoas(id INT PRIMARY KEY NOT NULL, pessoa CHAR(50) NOT NULL)', (err, res) => {
+    if (err) throw err;
+    console.log(res)
+  })
 
-  retornaPessoaEscolhida() {
-    return this.pessoaEscolhida;
-  }
+  db.query('INSERT INTO totalPessoas VALUES (1, Katreque)', (err, res) => {
+    if (err) throw err;
+    console.log(res)
+  })
 
-  retornaListaPessoasDisponiveis() {
-    return this.listaPessoasDisponiveisPogChamp;
-  }
+  db.query('INSERT INTO totalPessoas VALUES (2, 4HEAD)', (err, res) => {
+    if (err) throw err;
+    console.log(res)
+  })
 
-  recuperaListaTotalPessoas() {
-    this.db.query('SELECT', (err, listagemPessoas) => {
-      if (err) {
-        console.log({'error': err });
-      } else {
-        this.listaTotalPessoas = listagemPessoas[0];
-      }
-    });
-  }
+  db.query('INSERT INTO totalPessoas VALUES (3, KAPPA)', (err, res) => {
+    if (err) throw err;
+    console.log(res)
+  })
 
-  updateBancoListaTotalPessoas() {
-    //Não há necessidade por enquanto.
-  }
+  db.query('INSERT INTO totalPessoas VALUES (4, KAPPAPRIDE)', (err, res) => {
+    if (err) throw err;
+    console.log(res)
+  })
+}
 
-  createBancoListaTotalPessoas() {
-    this.db.query('CREATE TABLE totalPessoas(id INT PRIMARY KEY NOT NULL, pessoa CHAR(50) NOT NULL)', (err, res) => {
-      if (err) throw err;
-      console.log(res)
-    })
-
-    this.db.query('INSERT INTO totalPessoas VALUES (1, Katreque)', (err, res) => {
-      if (err) throw err;
-      console.log(res)
-    })
-
-    this.db.query('INSERT INTO totalPessoas VALUES (2, 4HEAD)', (err, res) => {
-      if (err) throw err;
-      console.log(res)
-    })
-
-    this.db.query('INSERT INTO totalPessoas VALUES (3, KAPPA)', (err, res) => {
-      if (err) throw err;
-      console.log(res)
-    })
-
-    this.db.query('INSERT INTO totalPessoas VALUES (4, KAPPAPRIDE)', (err, res) => {
-      if (err) throw err;
-      console.log(res)
-    })
-  }
-
-  recuperaListaPessoasDisponiveis() {
-    this.db.collection('listagemPessoasDisponiveisPogChamp').find().toArray((err, listagemPessoasDisponiveisPogChamp) => {
-      if (err) {
-        console.log({'error': err });
-      } else {
-        this.listaPessoasDisponiveisPogChamp = listagemPessoasDisponiveisPogChamp[0];
-      }
-    });
-  }
-
-  updateBancoListaPessoasDisponiveis(pessoas) {
-    const query = {_id: new ObjectId("5ad8d9b19db4aa00149c2264")};
-    const update = {$set:{pessoasDisponiveis: pessoas}}
-
-    this.db.collection('listagemPessoasDisponiveisPogChamp').updateOne(query, update, (err, result) => {
-      if (err) {
-        console.log({'error': err });
-      }
-    });
-  }
-
-  recuperaPessoaEscolhida() {
-    this.db.collection('pessoaEscolhida').find().toArray((err, pessoaEscolhida) => {
-      if (err) {
-        console.log({'error': err });
-      } else {
-        this.pessoaEscolhida = pessoaEscolhida[0];
-      }
-    });
-  }
-
-  updateBancoPessoaEscolhida(pessoa) {
-    const query = {_id: new ObjectId("5ad8d2accba15a0014a2289c")};
-    const update = {$set:{pessoaEscolhida: pessoa}}
-
-    this.db.collection('pessoaEscolhida').updateOne(query, update, (err, result) => {
-      if (err) {
-        console.log({'error': err });
-      }
-    });
+var recuperaListaPessoasDisponiveis = function() {
+  db.collection('listagemPessoasDisponiveisPogChamp').find().toArray((err, listagemPessoasDisponiveisPogChamp) => {
+    if (err) {
+      console.log({'error': err });
+    } else {
+      listaPessoasDisponiveisPogChamp = listagemPessoasDisponiveisPogChamp[0];
     }
+  });
+}
+
+var updateBancoListaPessoasDisponiveis = function(pessoas) {
+  const query = {_id: new ObjectId("5ad8d9b19db4aa00149c2264")};
+  const update = {$set:{pessoasDisponiveis: pessoas}}
+
+  db.collection('listagemPessoasDisponiveisPogChamp').updateOne(query, update, (err, result) => {
+    if (err) {
+      console.log({'error': err });
+    }
+  });
+}
+
+var recuperaPessoaEscolhida = function() {
+  db.collection('pessoaEscolhida').find().toArray((err, pessoaEscolhida) => {
+    if (err) {
+      console.log({'error': err });
+    } else {
+      pessoaEscolhida = pessoaEscolhida[0];
+    }
+  });
+}
+
+var updateBancoPessoaEscolhida = function(pessoa) {
+  const query = {_id: new ObjectId("5ad8d2accba15a0014a2289c")};
+  const update = {$set:{pessoaEscolhida: pessoa}}
+
+  db.collection('pessoaEscolhida').updateOne(query, update, (err, result) => {
+    if (err) {
+      console.log({'error': err });
+    }
+  });
+}
+
+module.exports = {
+  construct: construct
 }
