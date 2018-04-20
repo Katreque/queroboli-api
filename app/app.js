@@ -8,10 +8,10 @@ var construct = function() {
     ssl: true
   })
 
-  db = client;
-  pessoaEscolhida = "";
-  listaPessoasDisponiveisPogChamp = [];
-  listaTotalPessoas = [];
+  const db = client;
+  var pessoaEscolhida = "";
+  var listaPessoasDisponiveisPogChamp = [];
+  var listaTotalPessoas = [];
 
   //recuperaListaTotalPessoas();
   //recuperaListaPessoasDisponiveis();
@@ -65,6 +65,7 @@ var updateBancoListaTotalPessoas = function() {
 }
 
 var createBancoListaTotalPessoas = function() {
+  console.log('Bateu aqui');
   db.query('CREATE TABLE totalPessoas(id INT PRIMARY KEY NOT NULL, pessoa CHAR(50) NOT NULL)', (err, res) => {
     if (err) throw err;
     console.log(res)
