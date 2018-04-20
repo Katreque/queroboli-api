@@ -1,17 +1,20 @@
 class App {
   constructor(db) {
-    const ObjectId = require('mongodb').ObjectID;
+    const Server = require('../server.js');
 
-    this.db = db;
+    this.db = Server.Client;
     this.pessoaEscolhida = "";
     this.listaPessoasDisponiveisPogChamp = [];
     this.listaTotalPessoas = [];
 
-    this.recuperaListaTotalPessoas();
-    this.recuperaListaPessoasDisponiveis();
-    this.recuperaPessoaEscolhida();
+    //this.recuperaListaTotalPessoas();
+    //this.recuperaListaPessoasDisponiveis();
+    //this.recuperaPessoaEscolhida();
 
-    this.controleTempo();
+    this.db.connect();
+    this.createBancoListaTotalPessoas();
+    this.db.end();
+    //this.controleTempo();
   }
 
   escolhePessoa() {
@@ -42,7 +45,7 @@ class App {
   }
 
   recuperaListaTotalPessoas() {
-    this.db.collection('listagemPessoas').find().toArray((err, listagemPessoas) => {
+    this.db.query('SELECT', (err, listagemPessoas) => {
       if (err) {
         console.log({'error': err });
       } else {
@@ -53,6 +56,33 @@ class App {
 
   updateBancoListaTotalPessoas() {
     //Não há necessidade por enquanto.
+  }
+
+  createBancoListaTotalPessoas() {
+    this.db.query('CREATE TABLE totalPessoas(id INT PRIMARY KEY NOT NULL, pessoa CHAR(50) NOT NULL)', (err, res) => {
+      if (err) throw err;
+      console.log(res)
+    })
+
+    this.db.query('INSERT INTO totalPessoas VALUES (1, Katreque)', (err, res) => {
+      if (err) throw err;
+      console.log(res)
+    })
+
+    this.db.query('INSERT INTO totalPessoas VALUES (2, 4HEAD)', (err, res) => {
+      if (err) throw err;
+      console.log(res)
+    })
+
+    this.db.query('INSERT INTO totalPessoas VALUES (3, KAPPA)', (err, res) => {
+      if (err) throw err;
+      console.log(res)
+    })
+
+    this.db.query('INSERT INTO totalPessoas VALUES (4, KAPPAPRIDE)', (err, res) => {
+      if (err) throw err;
+      console.log(res)
+    })
   }
 
   recuperaListaPessoasDisponiveis() {
