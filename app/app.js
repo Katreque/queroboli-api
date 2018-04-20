@@ -69,22 +69,22 @@ var createBancoListaTotalPessoas = function() {
     console.log(res)
   })
 
-  db.query('INSERT INTO totalPessoas (id, pessoa) VALUES (1, "Katreque")', (err, res) => {
+  db.query('INSERT INTO "totalPessoas" ("id", "pessoa") VALUES (1, "Katreque")', (err, res) => {
     if (err) throw err;
     console.log(res)
   })
 
-  db.query('INSERT INTO totalPessoas (id, pessoa) VALUES (2, "KAPPA")', (err, res) => {
+  db.query('INSERT INTO "totalPessoas" (id, pessoa) VALUES (2, "KAPPA")', (err, res) => {
     if (err) throw err;
     console.log(res)
   })
 
-  db.query('INSERT INTO totalPessoas (id, pessoa) VALUES (3, "4HEAD")', (err, res) => {
+  db.query('INSERT INTO "totalPessoas" (id, pessoa) VALUES (3, "4HEAD")', (err, res) => {
     if (err) throw err;
     console.log(res)
   })
 
-  db.query('INSERT INTO totalPessoas (id, pessoa) VALUES (4, "KAPPAPRIDE")', (err, res) => {
+  db.query('INSERT INTO "totalPessoas" (id, pessoa) VALUES (4, "KAPPAPRIDE")', (err, res) => {
     if (err) throw err;
     console.log(res)
   })
