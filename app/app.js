@@ -5,6 +5,7 @@ const client = new Client({
 })
 
 const db = client;
+db.connect();
 var pessoaEscolhida = "";
 var listaPessoasDisponiveisPogChamp = [];
 var listaTotalPessoas = [];
@@ -16,10 +17,9 @@ var construct = function() {
   //recuperaListaPessoasDisponiveis();
   //recuperaPessoaEscolhida();
 
-  db.connect();
+
   console.log('Kappa');
   createBancoListaTotalPessoas();
-  db.end();
   //controleTempo();
 }
 
