@@ -29,6 +29,7 @@ var escolhePessoa = function() {
     updateBancoPessoaEscolhida(pessoaEscolhida);
   }
 
+  console.log(listaPessoasDisponiveisPogChamp);
   return listaPessoasDisponiveisPogChamp = listaTotalPessoas;
 }
 
