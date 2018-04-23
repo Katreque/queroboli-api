@@ -25,7 +25,6 @@ var escolhePessoa = function() {
   if (listaPessoasDisponiveisPogChamp.length !== 0) {
     let index = Math.floor(Math.random() * listaPessoasDisponiveisPogChamp.length);
     let escolhida = listaPessoasDisponiveisPogChamp.splice(index, 1);
-    console.log('Antes do update');
     updateBancoListaPessoasDisponiveis(listaPessoasDisponiveisPogChamp);
 
     pessoaEscolhida = escolhida;
@@ -74,7 +73,7 @@ var recuperaListaPessoasDisponiveis = function() {
 }
 
 var updateBancoListaPessoasDisponiveis = function(pessoas) {
-  console.log('pessoas' + pessoas);
+  console.log('pessoas' + pessoas[0]);
   for(let i = 0; i < pessoas.length; i++) {
     db.query('UPDATE pessoasDisponiveis SET pessoa = '+pessoas[i].pessoa+' WHERE ID = '+i+'', (err, _pessoaEscolhida) => {
       if (err) {
@@ -97,8 +96,8 @@ var recuperaPessoaEscolhida = function() {
 }
 
 var updateBancoPessoaEscolhida = function(pessoa) {
-  console.log('pessoa' + pessoa);
-  db.query('UPDATE pessoaEscolhida SET pessoa = '+pessoa.pessoa+' WHERE ID = 1', (err, _pessoaEscolhida) => {
+  console.log('pessoa' + pessoa[0]);
+  db.query('UPDATE pessoaEscolhida SET pessoa = '+pessoa[0].pessoa+' WHERE ID = 1', (err, _pessoaEscolhida) => {
     if (err) {
       console.log({'error': err });
     } else {
