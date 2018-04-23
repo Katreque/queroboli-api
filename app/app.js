@@ -13,10 +13,10 @@ var listaTotalPessoas = [];
 
 var construct = function() {
   recuperaListaTotalPessoas();
-  //recuperaListaPessoasDisponiveis();
-  //recuperaPessoaEscolhida();
+  recuperaListaPessoasDisponiveis();
+  recuperaPessoaEscolhida();
 
-  //controleTempo();
+  controleTempo();
 }
 
 var escolhePessoa = function() {
@@ -34,7 +34,10 @@ var escolhePessoa = function() {
 
 var controleTempo = function() {
   setInterval(() => {
-    return escolhePessoa();
+    console.log("listaTotalPessoas: " + listaTotalPessoas);
+    console.log("listaPessoasDisponiveisPogChamp: " + listaPessoasDisponiveisPogChamp);
+    console.log("pessoaEscolhida: " + pessoaEscolhida);
+    escolhePessoa();
   }, 5000)
 }
 
@@ -51,8 +54,7 @@ var recuperaListaTotalPessoas = function() {
     if (err) {
       console.log({'error': err });
     } else {
-      listaTotalPessoas = JSON.parse(JSON.stringify(listagemPessoas.rows));
-      console.log(listaTotalPessoas);
+      listaTotalPessoas = JSON.parse(listagemPessoas.rows);
     }
   });
 }
@@ -62,47 +64,49 @@ var updateBancoListaTotalPessoas = function() {
 }
 
 var recuperaListaPessoasDisponiveis = function() {
-  db.collection('listagemPessoasDisponiveisPogChamp').find().toArray((err, listagemPessoasDisponiveisPogChamp) => {
+  db.query('SELECT * FROM pessoasDisponiveis', (err, pessoasDisponiveis) => {
     if (err) {
       console.log({'error': err });
     } else {
-      listaPessoasDisponiveisPogChamp = listagemPessoasDisponiveisPogChamp[0];
+      listaPessoasDisponiveisPogChamp = JSON.parse(pessoasDisponiveis.rows);
     }
   });
 }
 
 var updateBancoListaPessoasDisponiveis = function(pessoas) {
-  const query = {_id: new ObjectId("5ad8d9b19db4aa00149c2264")};
-  const update = {$set:{pessoasDisponiveis: pessoas}}
-
-  db.collection('listagemPessoasDisponiveisPogChamp').updateOne(query, update, (err, result) => {
-    if (err) {
-      console.log({'error': err });
-    }
-  });
+  for(let i = 0; i < pessoas.length; i++) {
+    db.query('UPDATE pessoasDisponiveis SET pessoa = '+pessoas[i].pessoa+' WHERE ID = '+i+'', (err, _pessoaEscolhida) => {
+      if (err) {
+        console.log({'error': err });
+      } else {
+        console.log('Update na pessoasDisponiveis realizado com sucesso!');
+      }
+    });
+  }
 }
 
 var recuperaPessoaEscolhida = function() {
-  db.collection('pessoaEscolhida').find().toArray((err, pessoaEscolhida) => {
+  db.query('SELECT * FROM pessoaEscolhida', (err, _pessoaEscolhida) => {
     if (err) {
       console.log({'error': err });
     } else {
-      pessoaEscolhida = pessoaEscolhida[0];
+      pessoaEscolhida = JSON.parse(_pessoaEscolhida.rows);
     }
   });
 }
 
 var updateBancoPessoaEscolhida = function(pessoa) {
-  const query = {_id: new ObjectId("5ad8d2accba15a0014a2289c")};
-  const update = {$set:{pessoaEscolhida: pessoa}}
-
-  db.collection('pessoaEscolhida').updateOne(query, update, (err, result) => {
+  db.query('UPDATE pessoaEscolhida SET pessoa = '+pessoa.pessoa+' WHERE ID = 1', (err, _pessoaEscolhida) => {
     if (err) {
       console.log({'error': err });
+    } else {
+      console.log('Update na pessoaEscolhida realizado com sucesso!');
     }
   });
 }
 
 module.exports = {
-  construct: construct
+  construct: construct,
+  retornaPessoaEscolhida: retornaPessoaEscolhida,
+  retornaListaPessoasDisponiveis: retornaListaPessoasDisponiveis
 }
