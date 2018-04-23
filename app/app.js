@@ -51,8 +51,8 @@ var recuperaListaTotalPessoas = function() {
     if (err) {
       console.log({'error': err });
     } else {
-      listaTotalPessoas = listagemPessoas;
-      console.log(listagemPessoas);
+      listaTotalPessoas = JSON.parse(JSON.stringify(listagemPessoas));
+      console.log(listaTotalPessoas);
     }
   });
 }
