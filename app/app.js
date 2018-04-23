@@ -66,8 +66,8 @@ var recuperaListaPessoasDisponiveis = function() {
     if (err) {
       console.log({'error': err });
     } else {
-      listaPessoasDisponiveisPogChamp = JSON.parse(pessoasDisponiveis.rows);
-      console.log(JSON.parse(pessoasDisponiveis.rows));
+      listaPessoasDisponiveisPogChamp = pessoasDisponiveis.rows;
+      console.log(pessoasDisponiveis.rows);
     }
   });
 }
@@ -89,8 +89,8 @@ var recuperaPessoaEscolhida = function() {
     if (err) {
       console.log({'error': err });
     } else {
-      pessoaEscolhida = JSON.parse(_pessoaEscolhida.rows);
-      console.log(JSON.parse(_pessoaEscolhida.rows));
+      pessoaEscolhida = _pessoaEscolhida.rows;
+      console.log(_pessoaEscolhida.rows);
     }
   });
 }
