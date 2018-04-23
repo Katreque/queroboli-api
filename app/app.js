@@ -51,8 +51,8 @@ var recuperaListaTotalPessoas = function() {
     if (err) {
       console.log({'error': err });
     } else {
-      listaTotalPessoas = JSON.parse(listagemPessoas.rows);
-      console.log(JSON.parse(listagemPessoas.rows));
+      listaTotalPessoas = JSON.parse(JSON.stringify(listagemPessoas.rows));
+      console.log(listaTotalPessoas);
     }
   });
 }
@@ -66,8 +66,8 @@ var recuperaListaPessoasDisponiveis = function() {
     if (err) {
       console.log({'error': err });
     } else {
-      listaPessoasDisponiveisPogChamp = pessoasDisponiveis.rows;
-      console.log(pessoasDisponiveis.rows);
+      listaPessoasDisponiveisPogChamp = JSON.parse(JSON.stringify(pessoasDisponiveis.rows));
+      console.log(listaPessoasDisponiveisPogChamp);
     }
   });
 }
@@ -89,8 +89,8 @@ var recuperaPessoaEscolhida = function() {
     if (err) {
       console.log({'error': err });
     } else {
-      pessoaEscolhida = _pessoaEscolhida.rows;
-      console.log(_pessoaEscolhida.rows);
+      pessoaEscolhida = JSON.parse(JSON.stringify(_pessoaEscolhida.rows));
+      console.log(pessoaEscolhida);
     }
   });
 }
