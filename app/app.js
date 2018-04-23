@@ -25,6 +25,7 @@ var escolhePessoa = function() {
   if (listaPessoasDisponiveisPogChamp.length !== 0) {
     let index = Math.floor(Math.random() * listaPessoasDisponiveisPogChamp.length);
     let escolhida = listaPessoasDisponiveisPogChamp.splice(index, 1);
+    console.log('Antes do update');
     updateBancoListaPessoasDisponiveis(listaPessoasDisponiveisPogChamp);
 
     pessoaEscolhida = escolhida;
