@@ -64,29 +64,39 @@ var updateBancoListaTotalPessoas = function() {
 }
 
 var createBancoListaTotalPessoas = function() {
-  db.query('SELECT * FROM totalPessoas', (err, res) => {
+  db.query('CREATE TABLE totalPessoas(id INT PRIMARY KEY, pessoa CHAR(50))', (err, res) => {
     if (err) throw err;
-    console.log(res)
+    console.log('Criada totalPessoas!')
   })
 
-  db.query('INSERT INTO "totalPessoas" ("id", "pessoa") VALUES (1, "Katreque")', (err, res) => {
+  db.query('CREATE TABLE pessoaEscolhida(id INT PRIMARY KEY, pessoa CHAR(50))', (err, res) => {
     if (err) throw err;
-    console.log(res)
+    console.log('Criada pessoaEscolhida!')
   })
 
-  db.query('INSERT INTO "totalPessoas" (id, pessoa) VALUES (2, "KAPPA")', (err, res) => {
+  db.query('CREATE TABLE pessoasDisponiveis(id INT PRIMARY KEY, pessoa CHAR(50))', (err, res) => {
     if (err) throw err;
-    console.log(res)
+    console.log('Criada pessoasDisponiveis!')
   })
 
-  db.query('INSERT INTO "totalPessoas" (id, pessoa) VALUES (3, "4HEAD")', (err, res) => {
+  db.query("INSERT INTO totalPessoas (id, pessoa) VALUES (1, 'Katreque')", (err, res) => {
     if (err) throw err;
-    console.log(res)
+    console.log('Inserida 1')
   })
 
-  db.query('INSERT INTO "totalPessoas" (id, pessoa) VALUES (4, "KAPPAPRIDE")', (err, res) => {
+  db.query("INSERT INTO totalPessoas (id, pessoa) VALUES (2, 'KAPPA')", (err, res) => {
     if (err) throw err;
-    console.log(res)
+    console.log('Inserida 2')
+  })
+
+  db.query("INSERT INTO totalPessoas (id, pessoa) VALUES (3, '4HEAD')", (err, res) => {
+    if (err) throw err;
+    console.log('Inserida 3')
+  })
+
+  db.query("INSERT INTO totalPessoas (id, pessoa) VALUES (4, 'KappaPride')", (err, res) => {
+    if (err) throw err;
+    console.log('Inserida 4')
   })
 }
 
