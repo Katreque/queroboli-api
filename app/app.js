@@ -35,9 +35,6 @@ var escolhePessoa = function() {
 var controleTempo = function() {
   setInterval(() => {
     escolhePessoa();
-    console.log(pessoaEscolhida);
-    console.log(listaPessoasDisponiveisPogChamp);
-    console.log(listaTotalPessoas);
   }, 20000)
 }
 
@@ -74,6 +71,7 @@ var recuperaListaPessoasDisponiveis = function() {
 }
 
 var updateBancoListaPessoasDisponiveis = function(pessoas) {
+  console.log('pessoas' + pessoas);
   for(let i = 0; i < pessoas.length; i++) {
     db.query('UPDATE pessoasDisponiveis SET pessoa = '+pessoas[i].pessoa+' WHERE ID = '+i+'', (err, _pessoaEscolhida) => {
       if (err) {
