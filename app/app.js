@@ -35,9 +35,6 @@ var escolhePessoa = function() {
 var controleTempo = function() {
   setInterval(() => {
     escolhePessoa();
-    console.log("listaTotalPessoas: " + listaTotalPessoas);
-    console.log("listaPessoasDisponiveisPogChamp: " + listaPessoasDisponiveisPogChamp);
-    console.log("pessoaEscolhida: " + pessoaEscolhida);
   }, 5000)
 }
 
@@ -55,6 +52,7 @@ var recuperaListaTotalPessoas = function() {
       console.log({'error': err });
     } else {
       listaTotalPessoas = JSON.parse(listagemPessoas.rows);
+      console.log(JSON.parse(listagemPessoas.rows));
     }
   });
 }
@@ -69,6 +67,7 @@ var recuperaListaPessoasDisponiveis = function() {
       console.log({'error': err });
     } else {
       listaPessoasDisponiveisPogChamp = JSON.parse(pessoasDisponiveis.rows);
+      console.log(JSON.parse(pessoasDisponiveis.rows));
     }
   });
 }
@@ -91,6 +90,7 @@ var recuperaPessoaEscolhida = function() {
       console.log({'error': err });
     } else {
       pessoaEscolhida = JSON.parse(_pessoaEscolhida.rows);
+      console.log(JSON.parse(_pessoaEscolhida.rows));
     }
   });
 }
