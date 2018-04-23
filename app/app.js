@@ -16,7 +16,7 @@ var construct = function() {
   recuperaListaPessoasDisponiveis();
   recuperaPessoaEscolhida();
 
-  controleTempo();
+  //controleTempo();
 }
 
 var escolhePessoa = function() {
@@ -29,7 +29,8 @@ var escolhePessoa = function() {
     updateBancoPessoaEscolhida(pessoaEscolhida);
   }
 
-  console.log(listaPessoasDisponiveisPogChamp);
+  console.log("Lista" + listaPessoasDisponiveisPogChamp);
+  console.log("ListaTotal" + listaTotalPessoas);
   return listaPessoasDisponiveisPogChamp = listaTotalPessoas;
 }
 
