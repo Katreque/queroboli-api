@@ -12,8 +12,6 @@ var listaPessoasDisponiveisPogChamp = [];
 var listaTotalPessoas = [];
 
 var construct = function() {
-  console.log('Rodou!');
-
   recuperaListaTotalPessoas();
   //recuperaListaPessoasDisponiveis();
   //recuperaPessoaEscolhida();
@@ -53,8 +51,8 @@ var recuperaListaTotalPessoas = function() {
     if (err) {
       console.log({'error': err });
     } else {
-      listaTotalPessoas = listagemPessoas[0];
-      console.log(listaTotalPessoas);
+      listaTotalPessoas = listagemPessoas;
+      console.log(listagemPessoas);
     }
   });
 }
