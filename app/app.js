@@ -16,7 +16,7 @@ var construct = function() {
   recuperaListaPessoasDisponiveis();
   recuperaPessoaEscolhida();
 
-  controleTempo();
+  escolhePessoa();
 }
 
 var escolhePessoa = function() {
@@ -94,6 +94,7 @@ var recuperaPessoaEscolhida = function() {
 }
 
 var updateBancoPessoaEscolhida = function(pessoa) {
+  console.log('pessoa' + pessoa);
   db.query('UPDATE pessoaEscolhida SET pessoa = '+pessoa.pessoa+' WHERE ID = 1', (err, _pessoaEscolhida) => {
     if (err) {
       console.log({'error': err });
