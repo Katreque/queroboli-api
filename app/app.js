@@ -37,7 +37,7 @@ var escolhePessoa = function() {
 var controleTempo = function() {
   setInterval(() => {
     escolhePessoa();
-  }, 20000)
+  }, 10000)
 }
 
 var retornaPessoaEscolhida = function() {
@@ -73,9 +73,8 @@ var recuperaListaPessoasDisponiveis = function() {
 }
 
 var updateBancoListaPessoasDisponiveis = function(pessoas) {
-  console.log('pessoas' + pessoas[0].pessoa);
   for(let i = 0; i < pessoas.length; i++) {
-    db.query('UPDATE pessoasDisponiveis SET pessoa = '+pessoas[i].pessoa+' WHERE ID = '+i+'', (err, _pessoaEscolhida) => {
+    db.query('UPDATE pessoasDisponiveis SET pessoa = '+(pessoas[i].pessoa).toString()+' WHERE ID = '+i+'', (err, _pessoaEscolhida) => {
       if (err) {
         console.log({'error': err });
       } else {
@@ -96,8 +95,7 @@ var recuperaPessoaEscolhida = function() {
 }
 
 var updateBancoPessoaEscolhida = function(pessoa) {
-  console.log('pessoa' + pessoa[0].pessoa);
-  db.query('UPDATE pessoaEscolhida SET pessoa = '+pessoa[0].pessoa+' WHERE ID = 1', (err, _pessoaEscolhida) => {
+  db.query('UPDATE pessoaEscolhida SET pessoa = '+(pessoa[0].pessoa).toString()+' WHERE ID = 1', (err, _pessoaEscolhida) => {
     if (err) {
       console.log({'error': err });
     } else {
