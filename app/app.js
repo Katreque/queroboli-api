@@ -14,11 +14,10 @@ var listaTotalPessoas = [];
 var construct = function() {
   console.log('Rodou!');
 
-  //recuperaListaTotalPessoas();
+  recuperaListaTotalPessoas();
   //recuperaListaPessoasDisponiveis();
   //recuperaPessoaEscolhida();
 
-  createBancoListaTotalPessoas();
   //controleTempo();
 }
 
@@ -50,39 +49,18 @@ var retornaListaPessoasDisponiveis = function() {
 }
 
 var recuperaListaTotalPessoas = function() {
-  db.query('SELECT', (err, listagemPessoas) => {
+  db.query('SELECT * FROM totalPessoas', (err, listagemPessoas) => {
     if (err) {
       console.log({'error': err });
     } else {
       listaTotalPessoas = listagemPessoas[0];
+      console.log(listaTotalPessoas);
     }
   });
 }
 
 var updateBancoListaTotalPessoas = function() {
   //Não há necessidade por enquanto.
-}
-
-var createBancoListaTotalPessoas = function() {
-  db.query("INSERT INTO pessoaEscolhida (id, pessoa) VALUES (1, 'Katreque')", (err, res) => {
-    if (err) throw err;
-    console.log('Inserida 1')
-  })
-
-  db.query("INSERT INTO pessoasDisponiveis (id, pessoa) VALUES (2, 'KAPPA')", (err, res) => {
-    if (err) throw err;
-    console.log('Inserida 2')
-  })
-
-  db.query("INSERT INTO pessoasDisponiveis (id, pessoa) VALUES (3, '4HEAD')", (err, res) => {
-    if (err) throw err;
-    console.log('Inserida 3')
-  })
-
-  db.query("INSERT INTO pessoasDisponiveis (id, pessoa) VALUES (4, 'KappaPride')", (err, res) => {
-    if (err) throw err;
-    console.log('Inserida 4')
-  })
 }
 
 var recuperaListaPessoasDisponiveis = function() {
