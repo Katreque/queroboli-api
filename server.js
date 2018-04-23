@@ -19,6 +19,14 @@ app.use(cors(corsOptions))
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+app.get('/boli-pessoa-escolhida', (req, res) => {
+  res.send({pessoa: App.retornaPessoaEscolhida()});
+});
+
+app.get('/boli-listagem-pessoas-disponiveis', (req, res) => {
+  res.send({pessoas: App.retornaListaPessoasDisponiveis()});
+});
+
 app.listen(port, () => {
   console.log('Porta: ' + port);
   App.construct();

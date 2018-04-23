@@ -16,9 +16,7 @@ var construct = function() {
   recuperaListaPessoasDisponiveis();
   recuperaPessoaEscolhida();
 
-  setInterval(() => {
-    escolhePessoa();
-  }, 5000)
+  controleTempo();
 }
 
 var escolhePessoa = function() {
@@ -37,7 +35,7 @@ var escolhePessoa = function() {
 var controleTempo = function() {
   setInterval(() => {
     escolhePessoa();
-  }, 10000)
+  }, 5000)
 }
 
 var retornaPessoaEscolhida = function() {
