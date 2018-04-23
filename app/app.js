@@ -21,6 +21,7 @@ var construct = function() {
 
 var escolhePessoa = function() {
   if (listaPessoasDisponiveisPogChamp.length !== 0) {
+    console.log('NANI');
     let index = Math.floor(Math.random() * listaPessoasDisponiveisPogChamp.length);
     let escolhida = listaPessoasDisponiveisPogChamp.splice(index, 1);
     updateBancoListaPessoasDisponiveis(listaPessoasDisponiveisPogChamp);
@@ -29,6 +30,7 @@ var escolhePessoa = function() {
     updateBancoPessoaEscolhida(pessoaEscolhida);
   }
 
+  console.log('NANIXQD');
   return listaPessoasDisponiveisPogChamp = listaTotalPessoas;
 }
 
