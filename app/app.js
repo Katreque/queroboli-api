@@ -34,10 +34,10 @@ var escolhePessoa = function() {
 
 var controleTempo = function() {
   setInterval(() => {
+    escolhePessoa();
     console.log("listaTotalPessoas: " + listaTotalPessoas);
     console.log("listaPessoasDisponiveisPogChamp: " + listaPessoasDisponiveisPogChamp);
     console.log("pessoaEscolhida: " + pessoaEscolhida);
-    escolhePessoa();
   }, 5000)
 }
 
