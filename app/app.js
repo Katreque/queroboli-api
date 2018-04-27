@@ -12,9 +12,9 @@ var listaPessoasDisponiveisPogChamp = [];
 var listaTotalPessoas = [];
 
 var construct = function() {
-  recuperaListaTotalPessoas();
-  recuperaListaPessoasDisponiveis();
-  recuperaPessoaEscolhida();
+  listaTotalPessoas = recuperaListaTotalPessoas();
+  listaPessoasDisponiveisPogChamp = recuperaListaPessoasDisponiveis();
+  pessoaEscolhida = recuperaPessoaEscolhida();
 
   controleTempo();
 }
@@ -70,7 +70,9 @@ var recuperaListaPessoasDisponiveis = function() {
     if (err) {
       console.log({'error': err });
     } else {
-      listaPessoasDisponiveisPogChamp = JSON.parse(JSON.stringify(pessoasDisponiveis.rows));
+      let retorno = JSON.parse(JSON.stringify(pessoasDisponiveis.rows));
+      console.log('Recupera Lista Pessoas' + retorno);
+      return retorno;
     }
   });
 }
@@ -92,7 +94,9 @@ var recuperaPessoaEscolhida = function() {
     if (err) {
       console.log({'error': err });
     } else {
-      pessoaEscolhida = JSON.parse(JSON.stringify(_pessoaEscolhida.rows));
+      let retorno = JSON.parse(JSON.stringify(_pessoaEscolhida.rows));
+      console.log(retorno);
+      return retorno;
     }
   });
 }
