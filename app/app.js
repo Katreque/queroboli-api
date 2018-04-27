@@ -40,13 +40,13 @@ var escolhePessoa = function(listaPessoasDisponiveisPogChamp, listaTotalPessoas,
         pessoaEscolhida = escolhida;
         updateBancoPessoaEscolhida(pessoaEscolhida);
       });
-  }
-
-  recuperaListaTotalPessoas()
+  } else {
+    recuperaListaTotalPessoas()
     .then((res) => {
       listaPessoasDisponiveisPogChamp = res;
       console.log('Atualizando Lista disponiveis');
     })
+  }
 }
 
 var controleTempo = function() {
