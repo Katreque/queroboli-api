@@ -29,9 +29,8 @@ var escolhePessoa = function() {
     updateBancoPessoaEscolhida(pessoaEscolhida);
   }
 
-  listaPessoasDisponiveisPogChamp = listaTotalPessoas;
+  listaPessoasDisponiveisPogChamp = recuperaListaTotalPessoas();
   console.log("ListaDisponivel" + listaPessoasDisponiveisPogChamp);
-  console.log("ListaTotal" + listaTotalPessoas);
 }
 
 var controleTempo = function() {
@@ -53,7 +52,7 @@ var recuperaListaTotalPessoas = function() {
     if (err) {
       console.log({'error': err });
     } else {
-      listaTotalPessoas = JSON.parse(JSON.stringify(listagemPessoas.rows));
+      return JSON.parse(JSON.stringify(listagemPessoas.rows));
     }
   });
 }
