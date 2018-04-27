@@ -47,7 +47,7 @@ var escolhePessoa = function(_listaPessoasDisponiveisPogChamp, _listaTotalPessoa
         })
     } else {
       let index = Math.floor(Math.random() * _listaPessoasDisponiveisPogChamp.length);
-      escolhida = _listaPessoasDisponiveisPogChamp.splice(index, 1);
+      escolhida = listaPessoasDisponiveisPogChamp.splice(index, 1);
 
       updateBancoListaPessoasDisponiveis(_listaPessoasDisponiveisPogChamp)
       .then(() => {
