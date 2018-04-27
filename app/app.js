@@ -33,10 +33,10 @@ var construct = function() {
 var escolhePessoa = function(_listaPessoasDisponiveisPogChamp, _listaTotalPessoas, _pessoaEscolhida) {
   if (_listaPessoasDisponiveisPogChamp.length !== 0) {
     console.log('Numero pessoas ' + _listaPessoasDisponiveisPogChamp.length);
-    let escolha;
+    let escolhida;
 
     if (listaPessoasDisponiveisPogChamp.length === 1) {
-      escolha = _listaPessoasDisponiveisPogChamp;
+      escolhida = _listaPessoasDisponiveisPogChamp;
       _listaPessoasDisponiveisPogChamp = [];
     } else {
       let index = Math.floor(Math.random() * _listaPessoasDisponiveisPogChamp.length);
