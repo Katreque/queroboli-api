@@ -37,10 +37,8 @@ var escolhePessoa = function(listaPessoasDisponiveisPogChamp, listaTotalPessoas,
     updateBancoListaPessoasDisponiveis(listaPessoasDisponiveisPogChamp)
       .then(() => {
         pessoaEscolhida = escolhida;
-        .then(() => {
-          updateBancoPessoaEscolhida(pessoaEscolhida);
-        })
-      })
+        updateBancoPessoaEscolhida(pessoaEscolhida);
+      });
   }
 
   recuperaListaTotalPessoas()
