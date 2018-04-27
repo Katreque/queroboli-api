@@ -16,11 +16,13 @@ var construct = function() {
   recuperaListaPessoasDisponiveis();
   recuperaPessoaEscolhida();
 
-  console.log('Inicializacao PE' + pessoaEscolhida);
-  console.log('Inicializacao LPD' + listaPessoasDisponiveisPogChamp);
-  console.log('Inicializacao LTP' + listaTotalPessoas);
+  setTimeout(() => {
+    console.log('Inicializacao PE' + pessoaEscolhida);
+    console.log('Inicializacao LPD' + listaPessoasDisponiveisPogChamp);
+    console.log('Inicializacao LTP' + listaTotalPessoas);
 
-  controleTempo();
+    controleTempo();
+  }, 1000);
 }
 
 var escolhePessoa = function() {
@@ -59,7 +61,7 @@ var recuperaListaTotalPessoas = function() {
       console.log({'error': err });
     } else {
       let retorno = JSON.parse(JSON.stringify(listagemPessoas.rows));
-      return listaTotalPessoas = retorno;
+      listaTotalPessoas = retorno;
     }
   });
 }
@@ -74,7 +76,7 @@ var recuperaListaPessoasDisponiveis = function() {
       console.log({'error': err });
     } else {
       let retorno = JSON.parse(JSON.stringify(pessoasDisponiveis.rows));
-      return listaPessoasDisponiveisPogChamp = retorno;
+      listaPessoasDisponiveisPogChamp = retorno;
     }
   });
 }
@@ -97,7 +99,7 @@ var recuperaPessoaEscolhida = function() {
       console.log({'error': err });
     } else {
       let retorno = JSON.parse(JSON.stringify(_pessoaEscolhida.rows));
-      return listaTotalPessoas = retorno;
+      listaTotalPessoas = retorno;
     }
   });
 }
