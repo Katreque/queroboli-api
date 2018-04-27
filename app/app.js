@@ -13,7 +13,7 @@ var listaTotalPessoas = [];
 
 var construct = function() {
   listaTotalPessoas = recuperaListaTotalPessoas();
-  listaPessoasDisponiveisPogChamp = recuperaListaPessoasDisponiveis();
+  listaPessoasDisponiveisPogChamp = recuperaListaTotalPessoas();
   pessoaEscolhida = recuperaPessoaEscolhida();
 
   controleTempo();
@@ -55,7 +55,6 @@ var recuperaListaTotalPessoas = function() {
       console.log({'error': err });
     } else {
       let retorno = JSON.parse(JSON.stringify(listagemPessoas.rows));
-      console.log(retorno);
       return retorno;
     }
   });
@@ -71,7 +70,6 @@ var recuperaListaPessoasDisponiveis = function() {
       console.log({'error': err });
     } else {
       let retorno = JSON.parse(JSON.stringify(pessoasDisponiveis.rows));
-      console.log('Recupera Lista Pessoas' + retorno);
       return retorno;
     }
   });
@@ -95,7 +93,6 @@ var recuperaPessoaEscolhida = function() {
       console.log({'error': err });
     } else {
       let retorno = JSON.parse(JSON.stringify(_pessoaEscolhida.rows));
-      console.log(retorno);
       return retorno;
     }
   });
