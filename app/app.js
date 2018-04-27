@@ -17,7 +17,7 @@ var construct = function() {
       listaTotalPessoas = res;
     })
 
-  recuperaListaPessoasDisponiveis()
+  recuperaListaTotalPessoas()
     .then((res) => {
       listaPessoasDisponiveisPogChamp = res;
     })
@@ -32,6 +32,7 @@ var construct = function() {
 
 var escolhePessoa = function(listaPessoasDisponiveisPogChamp, listaTotalPessoas, pessoaEscolhida) {
   if (listaPessoasDisponiveisPogChamp.length !== 0) {
+    console.log('Numero pessoas ' + listaPessoasDisponiveisPogChamp.length);
     let index = Math.floor(Math.random() * listaPessoasDisponiveisPogChamp.length);
     let escolhida = listaPessoasDisponiveisPogChamp.splice(index, 1);
     updateBancoListaPessoasDisponiveis(listaPessoasDisponiveisPogChamp)
@@ -44,8 +45,7 @@ var escolhePessoa = function(listaPessoasDisponiveisPogChamp, listaTotalPessoas,
   recuperaListaTotalPessoas()
     .then((res) => {
       listaPessoasDisponiveisPogChamp = res;
-      console.log("ListaDisponivel " + listaPessoasDisponiveisPogChamp);
-      console.log("ListaTotal " + res);
+      console.log('Atualizando Lista disponiveis');
     })
 }
 
