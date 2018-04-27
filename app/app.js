@@ -38,16 +38,25 @@ var escolhePessoa = function(_listaPessoasDisponiveisPogChamp, _listaTotalPessoa
     if (_listaPessoasDisponiveisPogChamp.length === 1) {
       escolhida = _listaPessoasDisponiveisPogChamp;
       _listaPessoasDisponiveisPogChamp = [{id: 1, pessoa: ''}];
+
+      updateBancoListaPessoasDisponiveis(_listaPessoasDisponiveisPogChamp)
+        .then(() => {
+          pessoaEscolhida = escolhida;
+          updateBancoPessoaEscolhida(escolhida);
+        })
+        .finally(() => {
+          _listaPessoasDisponiveisPogChamp = [];          
+        })
     } else {
       let index = Math.floor(Math.random() * _listaPessoasDisponiveisPogChamp.length);
       escolhida = _listaPessoasDisponiveisPogChamp.splice(index, 1);
-    }
 
-    updateBancoListaPessoasDisponiveis(_listaPessoasDisponiveisPogChamp)
+      updateBancoListaPessoasDisponiveis(_listaPessoasDisponiveisPogChamp)
       .then(() => {
         pessoaEscolhida = escolhida;
         updateBancoPessoaEscolhida(escolhida);
       });
+    }
   } else {
     recuperaListaTotalPessoas()
     .then((res) => {
