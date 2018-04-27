@@ -68,7 +68,7 @@ var escolhePessoa = function(_listaPessoasDisponiveisPogChamp, _listaTotalPessoa
 var controleTempo = function() {
   setInterval(() => {
     escolhePessoa(listaPessoasDisponiveisPogChamp, listaTotalPessoas, pessoaEscolhida);
-  }, 15000)
+  }, 1000*60*60*12)
 }
 
 var retornaPessoaEscolhida = function() {
