@@ -31,7 +31,7 @@ var escolhePessoa = function() {
 
   listaPessoasDisponiveisPogChamp = listaTotalPessoas;
   console.log("ListaDisponivel" + listaPessoasDisponiveisPogChamp);
-  console.log("ListaTotal" + listaTotalPessoas.pessoa);
+  console.log("ListaTotal" + listaTotalPessoas);
 }
 
 var controleTempo = function() {
