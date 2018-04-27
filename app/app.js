@@ -31,13 +31,13 @@ var escolhePessoa = function() {
 
   listaPessoasDisponiveisPogChamp = listaTotalPessoas;
   console.log("ListaDisponivel" + listaPessoasDisponiveisPogChamp);
-  console.log("ListaTotal" + listaTotalPessoas);
+  console.log("ListaTotal" + listaTotalPessoas.pessoa);
 }
 
 var controleTempo = function() {
   setInterval(() => {
     escolhePessoa();
-  }, 5000)
+  }, 15000)
 }
 
 var retornaPessoaEscolhida = function() {
