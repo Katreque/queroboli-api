@@ -35,7 +35,7 @@ var escolhePessoa = function(_listaPessoasDisponiveisPogChamp, _listaTotalPessoa
     console.log('Numero pessoas ' + _listaPessoasDisponiveisPogChamp.length);
     let escolhida;
 
-    if (listaPessoasDisponiveisPogChamp.length === 1) {
+    if (_listaPessoasDisponiveisPogChamp.length === 1) {
       escolhida = _listaPessoasDisponiveisPogChamp;
       _listaPessoasDisponiveisPogChamp = [];
     } else {
