@@ -37,7 +37,7 @@ var escolhePessoa = function(_listaPessoasDisponiveisPogChamp, _listaTotalPessoa
 
     if (_listaPessoasDisponiveisPogChamp.length === 1) {
       escolhida = _listaPessoasDisponiveisPogChamp[0];
-      _listaPessoasDisponiveisPogChamp = [];
+      _listaPessoasDisponiveisPogChamp = [{id: 1, pessoa: ''}];
     } else {
       let index = Math.floor(Math.random() * _listaPessoasDisponiveisPogChamp.length);
       escolhida = _listaPessoasDisponiveisPogChamp.splice(index, 1);
