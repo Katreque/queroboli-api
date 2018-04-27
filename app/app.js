@@ -35,9 +35,12 @@ var escolhePessoa = function(listaPessoasDisponiveisPogChamp, listaTotalPessoas,
     let index = Math.floor(Math.random() * listaPessoasDisponiveisPogChamp.length);
     let escolhida = listaPessoasDisponiveisPogChamp.splice(index, 1);
     updateBancoListaPessoasDisponiveis(listaPessoasDisponiveisPogChamp);
-
-    pessoaEscolhida = escolhida;
-    updateBancoPessoaEscolhida(pessoaEscolhida);
+      .then(() => {
+        pessoaEscolhida = escolhida;
+        .then(() => {
+          updateBancoPessoaEscolhida(pessoaEscolhida);
+        })
+      })
   }
 
   recuperaListaTotalPessoas()
@@ -95,15 +98,19 @@ var recuperaListaPessoasDisponiveis = function() {
 }
 
 var updateBancoListaPessoasDisponiveis = function(pessoas) {
-  for(let i = 0; i < pessoas.length; i++) {
-    db.query('UPDATE pessoasDisponiveis SET pessoa = \''+(pessoas[i].pessoa)+'\' WHERE ID = '+i+'', (err, _pessoaEscolhida) => {
-      if (err) {
-        console.log({'error': err });
-      } else {
-        console.log('Update na pessoasDisponiveis realizado com sucesso!');
-      }
-    });
-  }
+  return new Promise((resolve, reject) => {
+    for(let i = 0; i < pessoas.length; i++) {
+      db.query('UPDATE pessoasDisponiveis SET pessoa = \''+(pessoas[i].pessoa)+'\' WHERE ID = '+i+'', (err, _pessoaEscolhida) => {
+        if (err) {
+          console.log({'error': err });
+          reject();
+        } else {
+          console.log('Update na pessoasDisponiveis realizado com sucesso!');
+          resolve();
+        }
+      });
+    }
+  })
 }
 
 var recuperaPessoaEscolhida = function() {
@@ -121,13 +128,17 @@ var recuperaPessoaEscolhida = function() {
 }
 
 var updateBancoPessoaEscolhida = function(pessoa) {
-  db.query('UPDATE pessoaEscolhida SET pessoa = \''+(pessoa[0].pessoa)+'\' WHERE ID = 1', (err, _pessoaEscolhida) => {
-    if (err) {
-      console.log({'error': err });
-    } else {
-      console.log('Update na pessoaEscolhida realizado com sucesso!');
-    }
-  });
+  return new Promise((resolve, reject) => {
+    db.query('UPDATE pessoaEscolhida SET pessoa = \''+(pessoa[0].pessoa)+'\' WHERE ID = 1', (err, _pessoaEscolhida) => {
+      if (err) {
+        console.log({'error': err });
+        reject();
+      } else {
+        console.log('Update na pessoaEscolhida realizado com sucesso!');
+        resolve();
+      }
+    });
+  })
 }
 
 module.exports = {
