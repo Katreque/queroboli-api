@@ -33,8 +33,16 @@ var construct = function() {
 var escolhePessoa = function(_listaPessoasDisponiveisPogChamp, _listaTotalPessoas, _pessoaEscolhida) {
   if (_listaPessoasDisponiveisPogChamp.length !== 0) {
     console.log('Numero pessoas ' + _listaPessoasDisponiveisPogChamp.length);
-    let index = Math.floor(Math.random() * _listaPessoasDisponiveisPogChamp.length);
-    let escolhida = _listaPessoasDisponiveisPogChamp.splice(index, 1);
+    let escolha;
+
+    if (listaPessoasDisponiveisPogChamp.length === 1) {
+      escolha = _listaPessoasDisponiveisPogChamp;
+      _listaPessoasDisponiveisPogChamp = [];
+    } else {
+      let index = Math.floor(Math.random() * _listaPessoasDisponiveisPogChamp.length);
+      escolhida = _listaPessoasDisponiveisPogChamp.splice(index, 1);
+    }
+
     updateBancoListaPessoasDisponiveis(_listaPessoasDisponiveisPogChamp)
       .then(() => {
         pessoaEscolhida = escolhida;
@@ -45,7 +53,7 @@ var escolhePessoa = function(_listaPessoasDisponiveisPogChamp, _listaTotalPessoa
     .then((res) => {
       listaPessoasDisponiveisPogChamp = res;
       console.log('Atualizando Lista disponiveis');
-      console.log(listaPessoasDisponiveisPogChamp);
+      escolhePessoa(listaPessoasDisponiveisPogChamp, listaTotalPessoas, pessoaEscolhida);
     })
   }
 }
