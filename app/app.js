@@ -30,9 +30,12 @@ var escolhePessoa = function(listaPessoasDisponiveisPogChamp, listaTotalPessoas,
   }
 
   let retorno = recuperaListaTotalPessoas();
-  listaPessoasDisponiveisPogChamp = retorno;
-  console.log("ListaDisponivel " + listaPessoasDisponiveisPogChamp);
-  console.log("ListaTotal " + retorno);
+
+  setTimeout(() => {
+    listaPessoasDisponiveisPogChamp = retorno;
+    console.log("ListaDisponivel " + listaPessoasDisponiveisPogChamp);
+    console.log("ListaTotal " + retorno);
+  }, 1000);
 }
 
 var controleTempo = function() {
