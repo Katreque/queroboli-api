@@ -16,16 +16,10 @@ var construct = function() {
   recuperaListaPessoasDisponiveis();
   recuperaPessoaEscolhida();
 
-  setTimeout(() => {
-    console.log('Inicializacao PE' + pessoaEscolhida);
-    console.log('Inicializacao LPD' + listaPessoasDisponiveisPogChamp);
-    console.log('Inicializacao LTP' + listaTotalPessoas);
-
-    controleTempo();
-  }, 1000);
+  controleTempo();
 }
 
-var escolhePessoa = function() {
+var escolhePessoa = function(listaPessoasDisponiveisPogChamp, listaTotalPessoas, pessoaEscolhida) {
   if (listaPessoasDisponiveisPogChamp.length !== 0) {
     let index = Math.floor(Math.random() * listaPessoasDisponiveisPogChamp.length);
     let escolhida = listaPessoasDisponiveisPogChamp.splice(index, 1);
@@ -43,7 +37,7 @@ var escolhePessoa = function() {
 
 var controleTempo = function() {
   setInterval(() => {
-    escolhePessoa();
+    escolhePessoa(listaPessoasDisponiveisPogChamp, listaTotalPessoas, pessoaEscolhida);
   }, 15000)
 }
 
