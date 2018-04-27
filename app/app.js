@@ -12,9 +12,20 @@ var listaPessoasDisponiveisPogChamp = [];
 var listaTotalPessoas = [];
 
 var construct = function() {
-  recuperaListaTotalPessoas();
-  recuperaListaPessoasDisponiveis();
-  recuperaPessoaEscolhida();
+  recuperaListaTotalPessoas()
+    .then((res) => {
+      listaTotalPessoas = res;
+    })
+
+  recuperaListaPessoasDisponiveis()
+    .then((res) => {
+      listaPessoasDisponiveisPogChamp = res;
+    })
+
+  recuperaPessoaEscolhida()
+    .then((res) => {
+      pessoaEscolhida = res;
+    })
 
   controleTempo();
 }
@@ -29,13 +40,12 @@ var escolhePessoa = function(listaPessoasDisponiveisPogChamp, listaTotalPessoas,
     updateBancoPessoaEscolhida(pessoaEscolhida);
   }
 
-  let retorno = recuperaListaTotalPessoas();
-
-  setTimeout(() => {
-    listaPessoasDisponiveisPogChamp = retorno;
-    console.log("ListaDisponivel " + listaPessoasDisponiveisPogChamp);
-    console.log("ListaTotal " + retorno);
-  }, 1000);
+  recuperaListaTotalPessoas()
+    .then((res) => {
+      listaPessoasDisponiveisPogChamp = res;
+      console.log("ListaDisponivel " + listaPessoasDisponiveisPogChamp);
+      console.log("ListaTotal " + res);
+    })
 }
 
 var controleTempo = function() {
@@ -53,14 +63,17 @@ var retornaListaPessoasDisponiveis = function() {
 }
 
 var recuperaListaTotalPessoas = function() {
-  db.query('SELECT * FROM totalPessoas', (err, listagemPessoas) => {
-    if (err) {
-      console.log({'error': err });
-    } else {
-      let retorno = JSON.parse(JSON.stringify(listagemPessoas.rows));
-      listaTotalPessoas = retorno;
-    }
-  });
+  return new Promise((resolve, reject) => {
+    db.query('SELECT * FROM totalPessoas', (err, listagemPessoas) => {
+      if (err) {
+          console.log({'error': err });
+          return reject(err);
+      } else {
+          let retorno = JSON.parse(JSON.stringify(listagemPessoas.rows));
+          return resolve(retorno);
+      }
+    });
+  })
 }
 
 var updateBancoListaTotalPessoas = function() {
@@ -68,14 +81,17 @@ var updateBancoListaTotalPessoas = function() {
 }
 
 var recuperaListaPessoasDisponiveis = function() {
-  db.query('SELECT * FROM pessoasDisponiveis', (err, pessoasDisponiveis) => {
-    if (err) {
-      console.log({'error': err });
-    } else {
-      let retorno = JSON.parse(JSON.stringify(pessoasDisponiveis.rows));
-      listaPessoasDisponiveisPogChamp = retorno;
-    }
-  });
+  return new Promise((resolve, reject) => {
+    db.query('SELECT * FROM pessoasDisponiveis', (err, pessoasDisponiveis) => {
+      if (err) {
+        console.log({'error': err });
+        reject(err);
+      } else {
+        let retorno = JSON.parse(JSON.stringify(pessoasDisponiveis.rows));
+        resolve(retorno);
+      }
+    });
+  })
 }
 
 var updateBancoListaPessoasDisponiveis = function(pessoas) {
@@ -91,14 +107,17 @@ var updateBancoListaPessoasDisponiveis = function(pessoas) {
 }
 
 var recuperaPessoaEscolhida = function() {
-  db.query('SELECT * FROM pessoaEscolhida', (err, _pessoaEscolhida) => {
-    if (err) {
-      console.log({'error': err });
-    } else {
-      let retorno = JSON.parse(JSON.stringify(_pessoaEscolhida.rows));
-      listaTotalPessoas = retorno;
-    }
-  });
+  return new Promise((resolve, reject) => {
+    db.query('SELECT * FROM pessoaEscolhida', (err, _pessoaEscolhida) => {
+      if (err) {
+        console.log({'error': err });
+        reject(err);
+      } else {
+        let retorno = JSON.parse(JSON.stringify(_pessoaEscolhida.rows));
+        resolve(retorno);
+      }
+    });
+  })
 }
 
 var updateBancoPessoaEscolhida = function(pessoa) {
