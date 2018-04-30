@@ -197,7 +197,7 @@ var recuperaDataAtualizacao = function() {
 
 var updateDataAtualizacao = function(data) {
   return new Promise((resolve, reject) => {
-    db.query('UPDATE dataAtualizacao SET pessoa = \''+data+'\' WHERE ID = 1', (err, _dataAtualizacao) => {
+    db.query('UPDATE dataAtualizacao SET data = \''+data+'\' WHERE ID = 1', (err, _dataAtualizacao) => {
       if (err) {
         console.log({'error': err });
         reject();
