@@ -10,6 +10,7 @@ db.connect();
 var pessoaEscolhida = "";
 var listaPessoasDisponiveisPogChamp = [];
 var listaTotalPessoas = [];
+var countDia = 0;
 
 var construct = function() {
   recuperaListaTotalPessoas()
@@ -31,8 +32,9 @@ var construct = function() {
 }
 
 var escolhePessoa = function(_listaPessoasDisponiveisPogChamp, _listaTotalPessoas, _pessoaEscolhida) {
+  console.log('Dia rodado: ' + countDia);
+  ++countDia;
   if (_listaPessoasDisponiveisPogChamp.length !== 0) {
-    console.log('Numero pessoas ' + _listaPessoasDisponiveisPogChamp.length);
     let escolhida;
 
     if (_listaPessoasDisponiveisPogChamp.length === 1) {
@@ -66,9 +68,10 @@ var escolhePessoa = function(_listaPessoasDisponiveisPogChamp, _listaTotalPessoa
 }
 
 var controleTempo = function() {
+    escolhePessoa(listaPessoasDisponiveisPogChamp, listaTotalPessoas, pessoaEscolhida);
   setInterval(() => {
     escolhePessoa(listaPessoasDisponiveisPogChamp, listaTotalPessoas, pessoaEscolhida);
-  }, 1000*60*60*12)
+  }, 1000*60*30)
 }
 
 var retornaPessoaEscolhida = function() {
