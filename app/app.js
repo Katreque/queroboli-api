@@ -75,7 +75,7 @@ var escolhePessoa = function(_listaPessoasDisponiveisPogChamp, _listaTotalPessoa
 }*/
 
 var verificaAtualizacaoDados = function() {
-  let temp = "'30/04/2018'";
+  let temp = "'04/30/2018'";
   db.query('INSERT INTO dataAtualizacao values (1, '+temp+')', (err, res) => {
     if (err) {
       throw err;
