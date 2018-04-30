@@ -28,7 +28,7 @@ var construct = function() {
       pessoaEscolhida = res;
     })
 
-  controleTempo();
+    verificaAtualizacaoDados();
 }
 
 var escolhePessoa = function(_listaPessoasDisponiveisPogChamp, _listaTotalPessoas, _pessoaEscolhida) {
@@ -67,11 +67,20 @@ var escolhePessoa = function(_listaPessoasDisponiveisPogChamp, _listaTotalPessoa
   }
 }
 
-var controleTempo = function() {
+/*var controleTempo = function() {
     escolhePessoa(listaPessoasDisponiveisPogChamp, listaTotalPessoas, pessoaEscolhida);
   setInterval(() => {
     escolhePessoa(listaPessoasDisponiveisPogChamp, listaTotalPessoas, pessoaEscolhida);
   }, 1000*60*30)
+}*/
+
+var verificaAtualizacaoDados = function() {
+  db.query('CREATE TABLE dataAtualizacao(id INT PRIMARY KEY NOT NULL, data timestamp NOT NULL)', (err, res) => {
+    if (err) {
+      throw err;
+    }
+    console.log(res)
+  })
 }
 
 var retornaPessoaEscolhida = function() {
