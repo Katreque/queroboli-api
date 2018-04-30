@@ -78,6 +78,7 @@ var verificaAtualizacaoDados = function() {
 
     recuperaDataAtualizacao()
     .then((dataServidor) => {
+      console.log(dataServidor);
       if (Moment(now).minute() != Moment(dataServidor).minute() && now > Moment(dataServidor)) {
         escolhePessoa(listaPessoasDisponiveisPogChamp, listaTotalPessoas, pessoaEscolhida);
       }
