@@ -212,5 +212,6 @@ var updateDataAtualizacao = function(data) {
 module.exports = {
   construct: construct,
   retornaPessoaEscolhida: retornaPessoaEscolhida,
-  retornaListaPessoasDisponiveis: retornaListaPessoasDisponiveis
+  retornaListaPessoasDisponiveis: retornaListaPessoasDisponiveis,
+  verificaAtualizacaoDados: verificaAtualizacaoDados
 }
