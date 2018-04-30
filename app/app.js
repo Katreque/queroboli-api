@@ -78,7 +78,7 @@ var verificaAtualizacaoDados = function() {
 
     recuperaDataAtualizacao()
     .then((dataServidor) => {
-      if (Moment(now).minute() != Moment(dataServidor).minute() && now > Moment(dataServidor) || true) {
+      if (Moment(now).minute() != Moment(dataServidor).minute() && now > Moment(dataServidor)) {
         escolhePessoa(listaPessoasDisponiveisPogChamp, listaTotalPessoas, pessoaEscolhida);
       }
     })
