@@ -86,7 +86,7 @@ var verificaAtualizacaoDados = function() {
       console.log(err);
     })
 
-    updateDataAtualizacao(Moment(now).format)
+    updateDataAtualizacao(Moment(now).format())
     .then(() => {
       console.log('DataAtualização atualizada: ' + now);
       resolve();
@@ -197,8 +197,7 @@ var recuperaDataAtualizacao = function() {
 
 var updateDataAtualizacao = function(data) {
   return new Promise((resolve, reject) => {
-    console.log(data);
-    db.query('UPDATE pessoaEscolhida SET pessoa = \''+(data)+'\' WHERE ID = 1', (err, _dataAtualizacao) => {
+    db.query('UPDATE pessoaEscolhida SET pessoa = \''+data+'\' WHERE ID = 1', (err, _dataAtualizacao) => {
       if (err) {
         console.log({'error': err });
         reject();
