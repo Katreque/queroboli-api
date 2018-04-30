@@ -20,11 +20,17 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.get('/boli-pessoa-escolhida', (req, res) => {
-  res.send({pessoa: App.retornaPessoaEscolhida()});
+  App.verificaAtualizacaoDados()
+    .then(() => {
+      return res.send({pessoa: App.retornaPessoaEscolhida()});      
+    })
 });
 
 app.get('/boli-listagem-pessoas-disponiveis', (req, res) => {
-  res.send({pessoas: App.retornaListaPessoasDisponiveis()});
+  App.verificaAtualizacaoDados()
+    .then(() => {
+      return res.send({pessoas: App.retornaListaPessoasDisponiveis()});
+    })
 });
 
 app.listen(port, () => {

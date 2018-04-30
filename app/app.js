@@ -1,3 +1,4 @@
+const Moment = require('moment');
 const { Client } = require('pg');
 const client = new Client({
   connectionString: process.env.DATABASE_URL,
@@ -10,7 +11,6 @@ db.connect();
 var pessoaEscolhida = "";
 var listaPessoasDisponiveisPogChamp = [];
 var listaTotalPessoas = [];
-var countDia = 0;
 
 var construct = function() {
   recuperaListaTotalPessoas()
@@ -32,8 +32,6 @@ var construct = function() {
 }
 
 var escolhePessoa = function(_listaPessoasDisponiveisPogChamp, _listaTotalPessoas, _pessoaEscolhida) {
-  console.log('Dia rodado: ' + countDia);
-  ++countDia;
   if (_listaPessoasDisponiveisPogChamp.length !== 0) {
     let escolhida;
 
@@ -75,12 +73,24 @@ var escolhePessoa = function(_listaPessoasDisponiveisPogChamp, _listaTotalPessoa
 }*/
 
 var verificaAtualizacaoDados = function() {
-  let temp = "'04/30/2018'";
-  db.query('INSERT INTO dataAtualizacao values (1, '+temp+')', (err, res) => {
-    if (err) {
-      throw err;
-    }
-    console.log(res)
+  return new Promise((resolve, reject) => {
+    let now = Moment(new Date()).format;
+
+    recuperaDataAtualizacao()
+    .then((dataServidor) => {
+      if (now.minute() != Moment(dataServidor).minute() && now > Moment(dataServidor)) {
+        escolhePessoa(listaPessoasDisponiveisPogChamp, listaTotalPessoas, pessoaEscolhida);
+      }
+    })
+
+    updateDataAtualizacao(now)
+    .then(() => {
+      console.log('DataAtualização atualizada: ' + now);
+      resolve();
+    })
+    .catch(() => {
+      reject();
+    })
   })
 }
 
@@ -157,6 +167,34 @@ var recuperaPessoaEscolhida = function() {
 var updateBancoPessoaEscolhida = function(pessoa) {
   return new Promise((resolve, reject) => {
     db.query('UPDATE pessoaEscolhida SET pessoa = \''+(pessoa[0].pessoa)+'\' WHERE ID = 1', (err, _pessoaEscolhida) => {
+      if (err) {
+        console.log({'error': err });
+        reject();
+      } else {
+        console.log('Update na pessoaEscolhida realizado com sucesso!');
+        resolve();
+      }
+    });
+  })
+}
+
+var recuperaDataAtualizacao = function() {
+  return new Promise((resolve, reject) => {
+    db.query('SELECT * FROM dataAtualizacao', (err, _dataAtualizacao) => {
+      if (err) {
+        console.log({'error': err });
+        reject(err);
+      } else {
+        let retorno = JSON.parse(JSON.stringify(_dataAtualizacao.rows));
+        resolve(retorno);
+      }
+    });
+  })
+}
+
+var updateDataAtualizacao = function(data) {
+  return new Promise((resolve, reject) => {
+    db.query('UPDATE pessoaEscolhida SET pessoa = \''+data+'\' WHERE ID = 1', (err, _dataAtualizacao) => {
       if (err) {
         console.log({'error': err });
         reject();
