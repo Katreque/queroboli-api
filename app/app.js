@@ -74,16 +74,19 @@ var escolhePessoa = function(_listaPessoasDisponiveisPogChamp, _listaTotalPessoa
 
 var verificaAtualizacaoDados = function() {
   return new Promise((resolve, reject) => {
-    let now = Moment(new Date()).format;
+    let now = new Date();
 
     recuperaDataAtualizacao()
     .then((dataServidor) => {
-      if (now.minute() != Moment(dataServidor).minute() && now > Moment(dataServidor)) {
+      if (Moment(now).minute() != Moment(dataServidor).minute() && now > Moment(dataServidor)) {
         escolhePessoa(listaPessoasDisponiveisPogChamp, listaTotalPessoas, pessoaEscolhida);
       }
     })
+    .catch((err) => {
+      console.log(err);
+    })
 
-    updateDataAtualizacao(now)
+    updateDataAtualizacao(Moment(now).format)
     .then(() => {
       console.log('DataAtualização atualizada: ' + now);
       resolve();
