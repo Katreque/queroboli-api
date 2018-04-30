@@ -78,7 +78,7 @@ var verificaAtualizacaoDados = function() {
 
     recuperaDataAtualizacao()
     .then((dataServidor) => {
-      if (Moment(now).minute() != Moment(dataServidor).minute() && now > Moment(dataServidor)) {
+      if (Moment(now).minute() != Moment(dataServidor).minute() && now > Moment(dataServidor) || true) {
         escolhePessoa(listaPessoasDisponiveisPogChamp, listaTotalPessoas, pessoaEscolhida);
       }
     })
@@ -202,7 +202,7 @@ var updateDataAtualizacao = function(data) {
         console.log({'error': err });
         reject();
       } else {
-        console.log('Update na pessoaEscolhida realizado com sucesso!');
+        console.log('Update na dataAtualizacao realizado com sucesso!');
         resolve();
       }
     });
