@@ -22,7 +22,10 @@ app.use(bodyParser.json());
 app.get('/boli-pessoa-escolhida', (req, res) => {
   App.verificaAtualizacaoDados()
     .then(() => {
-      return res.send({pessoa: App.retornaPessoaEscolhida()});      
+      return res.send({pessoa: App.retornaPessoaEscolhida()});
+    })
+    .catch((err) => {
+      console.log(err);
     })
 });
 
@@ -30,6 +33,9 @@ app.get('/boli-listagem-pessoas-disponiveis', (req, res) => {
   App.verificaAtualizacaoDados()
     .then(() => {
       return res.send({pessoas: App.retornaListaPessoasDisponiveis()});
+    })
+    .catch((err) => {
+      console.log(err);
     })
 });
 

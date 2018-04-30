@@ -88,8 +88,8 @@ var verificaAtualizacaoDados = function() {
       console.log('DataAtualização atualizada: ' + now);
       resolve();
     })
-    .catch(() => {
-      reject();
+    .catch((err) => {
+      reject(err);
     })
   })
 }
