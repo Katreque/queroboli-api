@@ -75,7 +75,8 @@ var escolhePessoa = function(_listaPessoasDisponiveisPogChamp, _listaTotalPessoa
 }*/
 
 var verificaAtualizacaoDados = function() {
-  db.query('CREATE TABLE dataAtualizacao(id INT PRIMARY KEY NOT NULL, data timestamp NOT NULL)', (err, res) => {
+  let temp = "'30/04/2018'";
+  db.query('INSERT dataAtualizacao values (1, '+temp+')', (err, res) => {
     if (err) {
       throw err;
     }
